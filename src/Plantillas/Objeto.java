@@ -27,7 +27,7 @@ public class Objeto extends JLabel implements MouseListener, MouseMotionListener
     private int posX, posY;                     // Posicion en X y en Y del Label
     private final int ANCHO = 150, ALTO = 150;  // Ancho y Alto del label (el mismo en todos los casos)
     private int Categoria, Subcategoria;        // Categoria del objeto para guardar en caja
-    private int offsetX, offsetY;               // Variables para mejor uso con mouse (se mantendra el draggin en donde se agarre el objeto)
+    private int offsetX, offsetY;                 // Variables para mejor uso con mouse (se mantendra el draggin en donde se agarre el objeto)
     private boolean dragging;                   // Booleano para saber si se esta arrastrando el objeto
 
     public Objeto(String StrCategoria, int subcategoria, int modoJuego) {
@@ -75,15 +75,18 @@ public class Objeto extends JLabel implements MouseListener, MouseMotionListener
     }
 
     public void mouseDragged(MouseEvent e) {
-        setLocation(e.getXOnScreen() - offsetX, e.getYOnScreen() - offsetY);
-        dragging = true;
+        if (dragging){
+
+            offsetX = e.getXOnScreen() - getLocationOnScreen().x - ANCHO / 2;   
+            offsetY = e.getYOnScreen() - getLocationOnScreen().y - ALTO / 2;
+            setLocation(getX() + offsetX, getY() +offsetY); 
+        }
     }
     public void mouseReleased(MouseEvent e) {
         dragging = false;
     }
     public void mousePressed(MouseEvent e){
-        offsetX = e.getX();
-        offsetY = e.getY();
+        dragging = true;
     }
     
     // Métodos de la interfaz MouseListener y MouseMotionListener que no se utilizan

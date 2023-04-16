@@ -16,14 +16,8 @@ public class Main{
         ventana.add(principal);
         ventana.setVisible(true);
         ventana.setResizable(false);
-        ventana.addComponentListener(new ComponentAdapter() {
-            @Override
-            public void componentMoved(ComponentEvent e) {
-                ventana.setLocation(0, 0);                      // En caso de que la ventana se mueva, se reinicia su posicion a la 0,0 relativo al monitor
-                //  (si no está ahi los objetos se mueven raro profe :c)
-            }
-        });
         ventana.pack();
+        ventana.setLocationRelativeTo(null);
         
         principal.logicaJuego();
 
