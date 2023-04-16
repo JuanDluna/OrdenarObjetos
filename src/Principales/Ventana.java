@@ -113,6 +113,7 @@ public class Ventana extends JPanel{
                                 remove(j);
                             }else{
                                 objetoX.setLocation(rand.nextInt(WIDTH - 200), rand.nextInt(570));
+                                puntaje.restarPuntaje(temp.getTiempoRestante());
                             }
                         }
                     }
