@@ -22,12 +22,12 @@ public class Puntaje extends JComponent {
     }
 
 
-    public void sumarPuntaje(int tiempoRestante){
-        puntaje += 100 * tiempoRestante;
+    public void sumarPuntaje(int tiempoRestante, int multiplicadorDificultad){
+        puntaje += 100 * tiempoRestante * multiplicadorDificultad;
     }
 
-    public void restarPuntaje(int tiempoRestante){
-        puntaje -= 100 * tiempoRestante;
+    public void restarPuntaje(int tiempoRestante, int multiplicadorDificultad){
+        puntaje -= 100 * tiempoRestante * multiplicadorDificultad;
     }
 
     public int getPuntaje() {

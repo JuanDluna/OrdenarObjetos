@@ -91,14 +91,31 @@ public class Ventana extends JPanel{
             }
 
             if(getComponentCount() <= 5){
-                JOptionPane.showMessageDialog(null, "FELICIDADES GANASTE\nPuntuación final: " + puntaje.getPuntaje(), 
-                                            "JUEGO FINALIZADO",
-                                            JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, 
+                        "FELICIDADES GANASTE\nPuntuación final: " + puntaje.getPuntaje(), 
+                        "JUEGO FINALIZADO",
+                        JOptionPane.INFORMATION_MESSAGE);
+                
+            JugarDeNuevo = JOptionPane.showConfirmDialog(null,
+                            "¿Deseas jugar de nuevo? (Se aumentará la dificultad reduciendo tiempo)" ,
+                            "Juego finalizado",
+                            JOptionPane.YES_NO_OPTION,
+                            JOptionPane.INFORMATION_MESSAGE);
                 break;
             }
 
             if(temp.getTiempoRestante() <= 0){
-                JOptionPane.showMessageDialog(null, "Puntuación final: " + puntaje.getPuntaje(), "TIEMPO FINALIZADO", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null,
+                "Puntuación final: " + puntaje.getPuntaje(), 
+                "TIEMPO FINALIZADO", 
+                JOptionPane.INFORMATION_MESSAGE);
+                
+                JugarDeNuevo = JOptionPane.showConfirmDialog(null,
+                            "¿Deseas jugar de nuevo?" ,
+                            "Juego finalizado",
+                            JOptionPane.YES_NO_OPTION,
+                            JOptionPane.INFORMATION_MESSAGE);
+                vecesJugado--;
                 break;
             }
 
@@ -109,11 +126,11 @@ public class Ventana extends JPanel{
                     if(cajas.sobreCaja(objetoX)){
                         if(!objetoX.getDraggin()){
                             if(cajas.addObjeto(objetoX)){
-                                puntaje.sumarPuntaje(temp.getTiempoRestante());
+                                puntaje.sumarPuntaje(temp.getTiempoRestante(), vecesJugado);
                                 remove(j);
                             }else{
                                 objetoX.setLocation(rand.nextInt(WIDTH - 200), rand.nextInt(570));
-                                puntaje.restarPuntaje(temp.getTiempoRestante());
+                                puntaje.restarPuntaje(temp.getTiempoRestante(), vecesJugado);
                             }
                         }
                     }
@@ -121,7 +138,7 @@ public class Ventana extends JPanel{
                         
                         if(!objetoX.getDraggin()){
                             objetoX.setLocation(rand.nextInt(WIDTH - 200), rand.nextInt(570));
-                            puntaje.restarPuntaje(temp.getTiempoRestante());
+                            puntaje.restarPuntaje(temp.getTiempoRestante(), vecesJugado);
                         }
                     }
                 }
@@ -130,10 +147,7 @@ public class Ventana extends JPanel{
             
         }
 
-        JugarDeNuevo = JOptionPane.showConfirmDialog(null,"¿Deseas jugar de nuevo? (Se aumentará la dificultad reduciendo tiempo)" ,
-                                                                    "Juego finalizado",
-                                                                    JOptionPane.YES_NO_OPTION,
-                                                                    JOptionPane.INFORMATION_MESSAGE);
+        
                                                                     
         if(JugarDeNuevo == JOptionPane.YES_OPTION){
             vecesJugado++;
@@ -149,7 +163,7 @@ public class Ventana extends JPanel{
         puntaje = new Puntaje();                    // Reinicia el puntaje
         temp = new Temporizador(minutosAJugar / vecesJugado);     // Reinicia el temporizador en el tiempo
         
-        JOptionPane.showMessageDialog(null, "Dificultad aumentada.\nTiempo inicial: " + temp.getTiempoFormateado(), "Juego nuevo.", JOptionPane.QUESTION_MESSAGE);
+        JOptionPane.showMessageDialog(null, "\nTiempo inicial: " + temp.getTiempoFormateado(), "Juego nuevo.", JOptionPane.QUESTION_MESSAGE);
 
         for (int subcategoria = 1; subcategoria <= 3; subcategoria++) {
             objetoX =  new Peluches(subcategoria, modoJuego);   

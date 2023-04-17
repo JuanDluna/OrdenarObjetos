@@ -1,10 +1,6 @@
 package Principales;
 
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
-
 import javax.swing.JFrame;
-
 
 public class Main{
 

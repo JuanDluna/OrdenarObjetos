@@ -56,23 +56,27 @@ public class Caja extends JLabel {
         return (getBounds().intersects(obj.getBounds()) && obj.getCategoria() != this.Categoria);
     }
 
+    public void setIconLleno(){
+        if(listaObjetos.size() == 3){
+            setIcon(new ImageIcon( new ImageIcon("resources/caja_cerrada.png").getImage().getScaledInstance(ANCHO, ALTO, Image.SCALE_FAST)));
+        }
+    }
+
     public boolean addObjeto(Objeto e){
-        
+
         if(modoJuego == 1 && e.getSubcategoria() == objetosRestantes){
             listaObjetos.add(e);
             objetosRestantes--;
+            setIconLleno();
             return true;
         }
         if(modoJuego == 0){
             listaObjetos.add(e);
             objetosRestantes--;
+            setIconLleno();
             return true;
         }
-        // Para mostrar el cambio de cantidad , se remueve el Label que contenia la cantidad "0"
-        // Se cambia por un "nuevo" Label que contiene la cantidad actual, siguiendo la misma estructura.
-        if(listaObjetos.size() == 3){
-            setIcon(new ImageIcon( new ImageIcon("resources/caja_cerrada.png").getImage().getScaledInstance(ANCHO, ALTO, Image.SCALE_FAST)));
-        }
+        
         return false;
     }
 
